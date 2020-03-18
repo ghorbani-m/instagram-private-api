@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import * as Bluebird from 'bluebird';
 import * as Chance from 'chance';
 import { jar } from 'request';
-import { Cookie, CookieJar, MemoryCookieStore } from 'tough-cookie';
+import { Cookie, CookieJar, MemoryCookieStore } from 'tough-cookie-no-native';
 import * as devices from '../samples/devices.json';
 import * as builds from '../samples/builds.json';
 import * as supportedCapabilities from '../samples/supported-capabilities.json';
@@ -226,7 +226,7 @@ export class State {
     const obj = typeof state === 'string' ? JSON.parse(state) : state;
     if (typeof obj !== 'object') {
       State.stateDebug(`State deserialization failed, obj is of type ${typeof obj} (object expected)`);
-      throw new TypeError('State isn\'t an object or serialized JSON');
+      throw new TypeError("State isn't an object or serialized JSON");
     }
     State.stateDebug(`Deserializing ${Object.keys(obj).join(', ')}`);
     if (obj.constants) {
