@@ -22,7 +22,7 @@ import { PostingLocation, PostingStoryOptions } from '../types/posting.options';
 import { IgConfigureVideoError, IgResponseError, IgUploadVideoError } from '../errors';
 import { StatusResponse, UploadRepositoryVideoResponseRootObject } from '../responses';
 import { PostingIgtvOptions } from '../types/posting.igtv.options';
-import sizeOf = require('image-size');
+import sizeOf = require('react-native-buffer-image-size');
 import Bluebird = require('bluebird');
 import Chance = require('chance');
 import { random, defaults } from 'lodash';
@@ -137,7 +137,7 @@ export class PublishService extends Repository {
     const uploadedPhoto = await this.client.upload.photo({
       file: options.file,
     });
-    const imageSize = await sizeOf(options.file);
+    const imageSize = sizeOf(options.file);
     const configureOptions: MediaConfigureTimelineOptions = {
       upload_id: uploadedPhoto.upload_id,
       width: imageSize.width,
@@ -221,7 +221,7 @@ export class PublishService extends Repository {
           uploadId: item.uploadId,
           isSidecar: true,
         });
-        const { width, height } = await sizeOf(item.file);
+        const { width, height } = sizeOf(item.file);
         item.width = width;
         item.height = height;
         item.uploadId = uploadedPhoto.upload_id;
@@ -521,7 +521,7 @@ export class PublishService extends Repository {
     configureOptions: MediaConfigureStoryBaseOptions,
   ) {
     const uploadId = Date.now().toString();
-    const imageSize = await sizeOf(options.file);
+    const imageSize = sizeOf(options.file);
     await this.client.upload.photo({
       file: options.file,
       uploadId,
