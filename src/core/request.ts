@@ -1,5 +1,5 @@
 import { defaultsDeep, inRange, random } from 'lodash';
-import { createHmac } from 'crypto';
+import { createHmac } from 'react-native-crypto';
 import { Subject } from 'rxjs';
 import { AttemptOptions, retry } from '@lifeomic/attempt';
 import * as request from 'request-promise';
